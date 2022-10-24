@@ -8,14 +8,23 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     stats: 'verbose',
+    
+    
     module: {
         rules: [
             {
-                test: '/\.js$/',
+                test: /\.js$/,
                 exclude: /node_modules/,
                 loader: "babel-loader"
+            },{
+                test: /\.scss$/,
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
             }
-        ]
+        ],
+        output: {
+            libraryTarget: 'var',
+            library: 'Client',
+            path: path.resolve(__dirname, 'dist')
     },
     plugins: [
         new HtmlWebPackPlugin({
