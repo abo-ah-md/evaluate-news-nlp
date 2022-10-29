@@ -1,7 +1,11 @@
+$primary-color:rgb(185, 86, 86);
+$secondary-color:rgba(66, 134, 223, 0.849);
+
 form {
     border: 1px solid #545454;
     border-radius: 3px;
     padding: 40px;
+    background-color: $secondary-color;
 }
 
 input {

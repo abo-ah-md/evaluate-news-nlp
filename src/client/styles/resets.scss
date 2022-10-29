@@ -38,13 +38,13 @@ body {
 ol, ul {
 	list-style: none;
 }
+
 blockquote, q {
 	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
+&:before :after{
 	content: '';
 	content: none;
+}
 }
 table {
 	border-collapse: collapse;

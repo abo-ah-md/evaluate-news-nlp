@@ -13,7 +13,7 @@ Service Workers
 
 - [ ] Have the developer environment set up with the Webpack dev server
 
-- [ ] Have a minimum of one form field
+- [ ✅] Have a minimum of one form field
 
 - [ ] Make one request to the Aylien API
 
