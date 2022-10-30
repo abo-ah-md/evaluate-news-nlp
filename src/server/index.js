@@ -14,6 +14,17 @@ const app = express();
 
 app.use(express.static('dist'))
 
+//Body-Parser
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+
+//Cors
+const cors = require('cors');
+app.use(cors());
+
+
 console.log(__dirname)
 
 app.get('/', function (req, res) {
