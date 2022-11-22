@@ -13,9 +13,11 @@ const textapi = new aylien({
     application_key: process.env.API_KEY
   });
 */
+
+
 const app = express();
 
-app.use(express.static(__dirname+ `/dist`))
+app.use(express.static('dist'))
 
 //Body-Parser
 const bodyParser = require('body-parser');
@@ -25,10 +27,12 @@ app.use(bodyParser.json());
 
 //Cors
 const cors = require('cors');
+const { log } = require('console');
 app.use(cors());
 
 
-console.log(__dirname)
+const apiKey = process.env.API_KEY;
+
 
 app.get('/', function (req, res) {
     // res.sendFile('dist/index.html')
@@ -36,19 +40,25 @@ app.get('/', function (req, res) {
 })
 
 
-const apiKey = process.env.API_KEY;
+
+const request = require('request');
+
 app.post('/sentimentAPI', function (req, res) {
-    const txt=req.body.txt;
+    console.log("somone has posted");
+    const txt=req.body.formText;
    
     getSentiment(txt,apiKey,(data)=>{
-res.send(data);
+        console.log(data)
+        res.send(data);
     })
+
+  
 
     
 
 })
 
-
+//the API call 
 const getSentiment = (txt, key, callback) => {
     request(`https://api.meaningcloud.com/sentiment-2.1?key=${key}&lang=en&txt=${txt}`, { 
         json: true }, 
