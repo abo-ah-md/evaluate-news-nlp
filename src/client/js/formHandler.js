@@ -1,42 +1,41 @@
-import { checkForName } from "./nameChecker";
+import { validUrl } from './validUrl'
 
 function handleSubmit(event) {
-  // check what text was put into the form field
-  let formText = document.getElementById("name").value;
+    event.preventDefault()
 
-  const baseURL = "http://localhost:8081/sentimentAPI";
+    const baseURL = "http://localhost:8081/sentimentAPI";
+    const url = document.getElementById('url').value; //url inserted by user
+    console.log(url);
 
-  if (checkForName(formText) == false) {
-    alert(
-      "The name is not valid. Please make sure that you inserted the correct name."
-    );
-  } else if (checkForName(formText)) {
-    fetch(baseURL, {
-      //sends the user's URL to the server for the API to use
-      method: "POST",
-      credentials: "same-origin",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({ txt: formText }),
-    })
-      .then((data) => {
-        console.log(res);
-        data.json();
-      })
-      .then(function (data) {
-        alert("hi", json());
-        document.getElementById("agreement").innerHTML = data.agreement;
-        document.getElementById("subjectivity").innerHTML = res.subjectivity;
-        document.getElementById("confidence").innerHTML = res.confidence;
-        document.getElementById("irony").innerHTML = res.irony;
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  }
+    //CHECK IF URL IS VALID
+    if (validUrl(url)) {
+        fetch(baseURL, { //sends the user's URL to the server for the API to use
+            method: 'POST',
+            credentials: 'same-origin',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({url: url})
+        })
+        .then(res => res.json()) //translate response obj to json:
+        .then(function (res) { //posts the retrieved data to the webpage
+            console.log(res);
+            document.getElementById('agreement').innerHTML = res.agreement;
+            document.getElementById('subjectivity').innerHTML = res.subjectivity;
+            document.getElementById('confidence').innerHTML = res.confidence;
+            document.getElementById('irony').innerHTML = res.irony;
+        })
+        .catch((error) => {
+            console.log(" an error", error);
+        })
+    } else {
+        alert("The URL is not valid. Please isert another one.")
+    }
 }
 
-export { handleSubmit };
+
+
+
+//EXPORT FILES
+export { handleSubmit }

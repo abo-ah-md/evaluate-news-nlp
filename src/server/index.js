@@ -2,8 +2,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 const path = require("path");
 const express = require("express");
-const mockAPIResponse = require("./mockAPI.js");
+const request = require("request");
 const aylien = require("aylien-news-api");
+
 
 /*
 const textapi = new aylien({
@@ -33,11 +34,11 @@ app.get("/", function (req, res) {
   res.sendFile(path.resolve("src/client/views/index.html"));
 });
 
-const request = require("request");
+
 
 app.post("/sentimentAPI", function (req, res) {
   console.log("somone has posted");
-  const txt = req.body.formText;
+  const txt = req.body.url;
 
   getSentiment(txt, apiKey, (data) => {
     console.log(data);
