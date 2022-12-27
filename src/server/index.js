@@ -5,7 +5,6 @@ const express = require("express");
 const request = require("request");
 const aylien = require("aylien-news-api");
 
-
 /*
 const textapi = new aylien({
     application_id: process.env.API_ID,
@@ -33,8 +32,6 @@ app.get("/", function (req, res) {
   // res.sendFile('dist/index.html')
   res.sendFile(path.resolve("src/client/views/index.html"));
 });
-
-
 
 app.post("/sentimentAPI", function (req, res) {
   console.log("somone has posted");
